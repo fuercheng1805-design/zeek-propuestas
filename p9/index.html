@@ -1,0 +1,120 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ZEEK · Propuesta 9 – Mezcla personalizada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;600;800;900&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--v:#6335ED;--vb:#5B4BF2;--vb2:#4F5BFF;--g:#01E576;--mint:#7DFFC4;--w:#F7F7F7;--k:#161616;--c:#1E1E22;--c2:#24242A}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--k);color:var(--w);font-family:Inter,system-ui,sans-serif;line-height:1.55;overflow-x:hidden}a{color:inherit;text-decoration:none}img{max-width:100%;display:block}
+.d{font-family:Unbounded,system-ui,sans-serif}
+h1,h2,h3{font-family:Unbounded,sans-serif;letter-spacing:-.02em;overflow-wrap:break-word}
+.thin{font-weight:200}.heavy{font-weight:900}
+section{padding:110px 6vw}
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:20px 6vw;transition:background .3s,backdrop-filter .3s,border-color .3s,padding .3s;border-bottom:1px solid transparent}
+.nav.sc{background:rgba(22,22,22,.62);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border-color:rgba(91,75,242,.35);padding:12px 6vw}
+.logo{position:relative;display:inline-block}.logo::before{content:"";position:absolute;inset:0;transform:translate(6px,6px);background:var(--g);border-radius:7px}
+.logo span{position:relative;display:block;background:#0c0c0c;border-radius:7px;padding:10px 16px}.logo img{height:28px}
+.nav nav{display:flex;gap:30px;align-items:center;font-weight:500}.nav nav a:not(.btn):hover{color:var(--g)}#m,.burger{display:none}
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:16px 30px;border-radius:999px;font-weight:700;font-family:Inter,sans-serif;font-size:16px;cursor:pointer;border:2px solid transparent;transition:transform .2s,box-shadow .2s,background .2s}
+.btn:hover{transform:translateY(-2px)}.pri{background:var(--g);color:var(--k)}.pri:hover{box-shadow:0 0 34px rgba(1,229,118,.55)}
+.sec{border-color:var(--w);color:var(--w)}.sec:hover{background:var(--w);color:var(--k)}.btn.sm{padding:10px 20px;font-size:14px}
+/* hero */
+.hero{min-height:100vh;display:grid;grid-template-columns:1.3fr 1fr;align-items:center;gap:4vw;padding-top:140px;position:relative;background:radial-gradient(ellipse 55% 60% at 78% 45%,rgba(91,75,242,.55),rgba(99,53,237,.18) 45%,transparent 72%)}
+.eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--g);margin-bottom:26px;font-weight:700}
+.hero h1{font-size:clamp(40px,6.6vw,108px);line-height:.98;letter-spacing:-.035em}
+.grad{background:linear-gradient(90deg,var(--g),var(--mint) 60%,#c9ffe6);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:19px;max-width:540px;margin:28px 0 40px;opacity:.78}.ctas{display:flex;gap:14px;flex-wrap:wrap}
+.iso{position:relative;display:grid;place-items:center}.iso::before{content:"";position:absolute;width:85%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(79,91,255,.55),rgba(99,53,237,.25) 45%,transparent 70%);filter:blur(40px);animation:pulse 6s ease-in-out infinite}
+.iso img{position:relative;width:78%;filter:drop-shadow(0 0 18px var(--vb)) drop-shadow(0 0 50px rgba(99,53,237,.8));animation:float 7s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.12);opacity:.75}}@keyframes float{50%{transform:translateY(-14px)}}
+/* manifesto */
+.mani{padding-top:60px}.mani p{font-size:clamp(34px,6.2vw,96px);line-height:1;text-transform:uppercase;letter-spacing:-.03em}
+.mani small{display:block;margin-top:34px;font-size:15px;max-width:520px;opacity:.65;text-transform:none;letter-spacing:0}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding-top:40px}
+.stats b{display:block;font-family:Unbounded;font-weight:900;font-size:clamp(48px,5.6vw,88px);line-height:1;font-style:italic;letter-spacing:-.04em}.stats b sup{color:var(--g);font-size:.5em;font-style:normal}
+.stats span{display:block;margin-top:12px;opacity:.7;font-size:15px;max-width:220px}
+/* headers */
+.hd{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:50px;flex-wrap:wrap}
+h2{font-size:clamp(30px,4.4vw,68px);line-height:1.02;text-transform:uppercase}.hd p{max-width:420px;opacity:.7}
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{--x:50%;--y:50%;position:relative;padding:38px 32px;border-radius:20px;background:var(--c);border:1px solid #2b2b31;overflow:hidden;transition:border-color .3s,transform .3s,box-shadow .3s}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(380px circle at var(--x) var(--y),rgba(1,229,118,.16),transparent 45%);opacity:0;transition:opacity .3s}
+.card:hover{border-color:var(--g);transform:translateY(-6px);box-shadow:0 0 0 1px var(--g),0 18px 50px -20px rgba(1,229,118,.5)}.card:hover::before{opacity:1}
+.card>*{position:relative}.card i{font-style:normal;font-family:Unbounded;font-weight:300;color:var(--g)}.card h3{font-size:34px;font-weight:800;margin:14px 0 10px}.card p{opacity:.75}.card a{display:inline-block;margin-top:22px;font-weight:700;color:var(--g)}
+/* carousel */
+.car{position:relative;height:640px;perspective:1400px}
+.slide{position:absolute;top:0;left:50%;width:min(420px,78vw);margin-left:calc(min(420px,78vw)/-2);background:var(--c2);border:1px solid #303038;border-radius:22px;overflow:hidden;transition:transform .6s cubic-bezier(.2,.8,.2,1),opacity .6s,filter .6s;cursor:pointer}
+.slide img{aspect-ratio:1;object-fit:cover;width:100%}.slide>div{padding:24px}.slide small{color:var(--g);font-size:13px}.slide h3{font-size:22px;margin:6px 0 8px}.slide p{opacity:.72;font-size:15px;margin-bottom:16px}
+.slide.soon{display:flex;flex-direction:column;justify-content:center;min-height:560px;background:linear-gradient(160deg,rgba(91,75,242,.35),var(--c2) 60%)}
+.slide.c{transform:translateX(0) scale(1);z-index:3;box-shadow:0 30px 80px -30px rgba(91,75,242,.7)}
+.slide.l{transform:translateX(-62%) scale(.78);z-index:1;opacity:.55;filter:brightness(.6)}
+.slide.r{transform:translateX(62%) scale(.78);z-index:1;opacity:.55;filter:brightness(.6)}
+.cc{display:flex;justify-content:center;align-items:center;gap:18px;margin-top:10px}.cc button{width:48px;height:48px;border-radius:50%;border:1.5px solid var(--w);background:none;color:var(--w);font-size:20px;cursor:pointer}.cc button:hover{background:var(--g);border-color:var(--g);color:var(--k)}
+.dots{display:flex;gap:8px}.dots i{width:9px;height:9px;border-radius:9px;background:#444;transition:.3s;cursor:pointer}.dots i.on{width:28px;background:var(--g)}
+/* recursos */
+.rec{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #2c2c30}.rec article{padding:34px 26px 34px 0;border-bottom:1px solid #2c2c30}.rec b{font-family:Unbounded;font-weight:200;font-size:44px;color:var(--g);display:block;margin-bottom:18px}.rec h3{font-size:18px;margin-bottom:8px}.rec p{opacity:.7;font-size:15px}
+/* gallery */
+.gal{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:240px 240px;gap:14px}.gal img,.phd{width:100%;height:100%;object-fit:cover;border-radius:16px}.gal img:first-child{grid-row:span 2}.phd{display:grid;place-items:center;grid-column:span 2;border:1px dashed #3a3a44;opacity:.6;font-weight:700}
+.tq{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.tq blockquote{padding:30px;border-radius:20px;background:var(--c);font-size:19px}.tq cite{display:block;margin-top:16px;font-style:normal;font-size:14px;opacity:.6}
+/* cierre */
+.cierre{text-align:center;padding:160px 6vw;background:radial-gradient(ellipse 50% 70% at 50% 50%,rgba(91,75,242,.75),rgba(99,53,237,.3) 45%,transparent 75%)}
+.cierre h2{text-transform:none;max-width:1000px;margin:auto}.cierre p{margin:20px auto 36px;max-width:520px;opacity:.85}
+/* footer */
+footer{display:grid;grid-template-columns:1fr 1.2fr;gap:6vw;padding:90px 6vw 40px;background:#0b0f0d}
+.fc .logo{margin-bottom:22px}.fc p{opacity:.7;max-width:340px}
+form{display:grid;gap:16px}form h3{font-size:26px}form>p{opacity:.7;margin-top:-8px}
+form input,form textarea{width:100%;padding:18px 22px;border-radius:14px;border:1px solid rgba(1,229,118,.45);background:#090c0b;color:var(--w);font:inherit;outline:none;transition:border-color .2s,box-shadow .2s}
+form input::placeholder,form textarea::placeholder{color:rgba(1,229,118,.55)}form input:focus,form textarea:focus{border-color:var(--g);box-shadow:0 0 0 3px rgba(1,229,118,.15)}form textarea{min-height:160px;resize:vertical}
+.send{justify-self:end;padding:13px 40px;border-radius:14px;border:1px solid rgba(1,229,118,.6);background:transparent;color:var(--g);font:inherit;font-weight:700;cursor:pointer;transition:.2s}.send:hover{background:var(--g);color:var(--k)}
+.soc{grid-column:1/-1;display:flex;gap:24px;flex-wrap:wrap;font-size:14px;opacity:.8;padding-top:30px;border-top:1px solid #222}.soc span{margin-left:auto}.soc a:hover{color:var(--g)}
+.js .rv{opacity:0;transform:translateY(28px);transition:opacity .8s,transform .8s}.js .rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.js .rv{opacity:1;transform:none}}
+@media(max-width:860px){.burger{display:block;font-size:26px;cursor:pointer}.nav nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;padding:24px;gap:18px;background:rgba(22,22,22,.95);backdrop-filter:blur(16px)}#m:checked~nav{display:flex}
+section{padding:72px 6vw}.hero{grid-template-columns:1fr;min-height:auto;padding-top:130px;background:radial-gradient(ellipse 90% 40% at 50% 80%,rgba(91,75,242,.5),transparent 70%)}.hero h1{font-size:clamp(32px,9.6vw,56px)}.iso{max-width:300px;margin:20px auto 0}
+.mani p{font-size:clamp(24px,7.6vw,48px)}.stats{grid-template-columns:1fr 1fr}.cards,.tq{grid-template-columns:1fr}.rec{grid-template-columns:1fr 1fr}
+.car{height:600px}.slide.l{transform:translateX(-30%) scale(.8)}.slide.r{transform:translateX(30%) scale(.8)}
+.gal{grid-template-columns:1fr 1fr;grid-template-rows:160px 160px 160px}.gal img:first-child{grid-column:span 2;grid-row:auto}footer{grid-template-columns:1fr}.soc span{margin-left:0}h2{font-size:clamp(26px,7.6vw,40px)}.cierre{padding:110px 6vw}}
+</style></head><body>
+<header class="nav" id="nav"><a class="logo" href="#top"><span><img src="assets/zeek-navbar.png" alt="ZEEK"></span></a>
+<input type="checkbox" id="m"><label for="m" class="burger">☰</label>
+<nav><a href="#que">Qué hacemos</a><a href="#eventos">Eventos</a><a href="#recursos">Recursos</a><a class="btn pri sm" href="https://chat.whatsapp.com/DD9aCaSvCDEI7avYGZNVby?mode=gi_t">Unite</a></nav></header>
+<section class="hero" id="top"><div>
+<p class="eyebrow">Comunidad Web3 · Costa Rica → Centroamérica</p>
+<h1><span class="thin">Donde los</span> <span class="heavy grad">builders</span> <span class="heavy">aprenden y construyen.</span></h1>
+<p class="lead">Educación práctica, comunidad y oportunidades reales desde Costa Rica para Centroamérica.</p>
+<div class="ctas"><a class="btn pri" href="https://chat.whatsapp.com/DD9aCaSvCDEI7avYGZNVby?mode=gi_t">Unite a la comunidad</a><a class="btn sec" href="#eventos">Ver próximos eventos</a></div></div>
+<div class="iso"><img src="assets/zeek-glow.png" alt="Isotipo ZEEK"></div></section>
+<section class="mani"><p class="d"><span class="thin">Aprender solo</span><br><span class="heavy">te mueve.</span><br><span class="thin">Construir juntos</span><br><span class="heavy grad">te transforma.</span></p><small>Somos la comunidad donde las ideas Web3 pasan de la teoría a proyectos reales.</small></section>
+<section class="stats"><div><b>[N]<sup>+</sup></b><span>builders en la comunidad</span></div><div><b>[N]<sup>+</sup></b><span>eventos realizados</span></div><div><b>[N]<sup>+</sup></b><span>talleres y charlas</span></div><div><b>[N]<sup>+</sup></b><span>aliados del ecosistema</span></div></section>
+<section id="que"><div class="hd"><h2><span class="thin">Creciendo en</span><br><span class="heavy">comunidad</span></h2><p>ZEEK es un espacio donde aprender, construir y conectar sucede en conjunto, desde el primer día.</p></div>
+<div class="cards"><article class="card"><i>01</i><h3>Aprendé</h3><p>Talleres, charlas y recursos para entender Web3 desde la práctica.</p><a href="#recursos">Ir a Recursos →</a></article>
+<article class="card"><i>02</i><h3>Construí</h3><p>Espacios para crear proyectos, experimentar y colaborar con otros builders.</p><a href="#eventos">Ir a Eventos →</a></article>
+<article class="card"><i>03</i><h3>Conectá</h3><p>Personas, ideas y oportunidades que nacen de la colaboración.</p><a href="https://chat.whatsapp.com/DD9aCaSvCDEI7avYGZNVby?mode=gi_t">Ir a Comunidad →</a></article></div></section>
+<section id="eventos"><div class="hd"><h2><span class="thin">Eventos y</span><br><span class="heavy">encuentros</span></h2><p>Espacios para aprender, conectar y construir en conjunto.</p></div>
+<div class="car" id="car">
+<article class="slide"><img src="assets/event1.png" alt="Blockchain After Office"><div><small>[fecha] · [lugar]</small><h3>Blockchain After Office</h3><p>Un espacio relajado para conectar, conversar y compartir ideas sobre Web3 fuera del entorno formal.</p><a class="btn pri sm" href="#">Registrarme</a></div></article>
+<article class="slide"><img src="assets/event2.png" alt="Stellar Summer Fridays"><div><small>[fecha] · [lugar]</small><h3>Stellar Summer Fridays</h3><p>Encuentros abiertos para aprender, conectar y construir comunidad alrededor del ecosistema Stellar.</p><a class="btn pri sm" href="#">Registrarme</a></div></article>
+<article class="slide soon"><div><small>Próximamente</small><h3>Nuevos eventos en camino</h3><p>Nuevas experiencias comunitarias están en camino. Quedate cerca.</p><a class="btn sec sm" href="https://chat.whatsapp.com/DD9aCaSvCDEI7avYGZNVby?mode=gi_t">Avisame</a></div></article></div>
+<div class="cc"><button id="pv" aria-label="Anterior">←</button><div class="dots" id="dots"></div><button id="nx" aria-label="Siguiente">→</button></div></section>
+<section id="recursos"><div class="hd"><h2><span class="thin">Recursos para</span><br><span class="heavy">construir</span></h2><p>Espacios, materiales y oportunidades para crecer dentro del ecosistema Web3.</p></div>
+<div class="rec"><article><b>01</b><h3>Talleres prácticos</h3><p>Sesiones para aprender haciendo, desde lo básico hasta lo aplicado.</p></article><article><b>02</b><h3>Material educativo</h3><p>Guías, recursos y contenido curado para explorar Web3 a tu ritmo.</p></article><article><b>03</b><h3>Networking y comunidad</h3><p>Espacios para conectar con personas, ideas y proyectos.</p></article><article><b>04</b><h3>Oportunidades</h3><p>Difusión de programas, convocatorias y espacios para participar.</p></article></div></section>
+<section><div class="hd"><h2><span class="thin">Así se vive</span><br><span class="heavy">ZEEK</span></h2></div><div class="gal"><img src="assets/people1.png" alt=""><img src="assets/people2.png" alt=""><img src="assets/people3.png" alt=""><div class="phd">[Foto de evento]</div></div></section>
+<section><div class="hd"><h2><span class="thin">Lo que dice la</span><br><span class="heavy">comunidad</span></h2></div><div class="tq"><blockquote>“[Testimonio real de un builder]”<cite>[Nombre] · [rol]</cite></blockquote><blockquote>“[Testimonio real de un builder]”<cite>[Nombre] · [rol]</cite></blockquote><blockquote>“[Testimonio real de un aliado]”<cite>[Nombre] · [organización]</cite></blockquote></div></section>
+<section class="cierre"><h2><span class="thin">¿Listo para construir</span> <span class="heavy">con nosotros?</span></h2><p>Sumate al grupo de WhatsApp y enterate primero de eventos, talleres y oportunidades.</p><a class="btn pri" href="https://chat.whatsapp.com/DD9aCaSvCDEI7avYGZNVby?mode=gi_t">Unite a la comunidad</a></section>
+<footer id="contacto"><div class="fc"><a class="logo" href="#top"><span><img src="assets/zeek-navbar.png" alt="ZEEK"></span></a><p>Comunidad Web3 enfocada en aprender haciendo y construir en conjunto.</p></div>
+<form onsubmit="return false"><h3>Contactanos</h3><p>Para colaboraciones, talleres, alianzas o patrocinio.</p><input placeholder="Nombre"><input type="email" placeholder="Email"><textarea placeholder="..."></textarea><button class="send">Enviar</button></form>
+<div class="soc"><a href="https://www.instagram.com/zeek_cr/">Instagram</a><a href="http://x.com/ZEEK_CR">X</a><a href="https://chat.whatsapp.com/DD9aCaSvCDEI7avYGZNVby?mode=gi_t">WhatsApp</a><span>© 2026 ZEEK — Built in Costa Rica</span></div></footer>
+<script>
+document.documentElement.classList.add('js');
+const nav=document.getElementById('nav');const sc=()=>nav.classList.toggle('sc',scrollY>30);addEventListener('scroll',sc);sc();
+const o=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');o.unobserve(x.target)}}),{threshold:.1});document.querySelectorAll('section>*,footer>*').forEach(el=>{el.classList.add('rv');o.observe(el)});
+document.querySelectorAll('.card').forEach(c=>c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--x',e.clientX-r.left+'px');c.style.setProperty('--y',e.clientY-r.top+'px')}));
+const s=[...document.querySelectorAll('.slide')],dots=document.getElementById('dots');let i=0,t;
+s.forEach((_,k)=>{const d=document.createElement('i');d.onclick=()=>go(k);dots.appendChild(d)});
+function go(n){i=(n+s.length)%s.length;s.forEach((el,k)=>{el.className=el.className.replace(/ ?\b[clr]\b/g,'');const d=(k-i+s.length)%s.length;el.classList.add(d==0?'c':d==1?'r':'l')});[...dots.children].forEach((d,k)=>d.classList.toggle('on',k==i));clearInterval(t);t=setInterval(()=>go(i+1),5500)}
+s.forEach((el,k)=>el.addEventListener('click',e=>{if(!el.classList.contains('c')){e.preventDefault();go(k)}}));
+document.getElementById('pv').onclick=()=>go(i-1);document.getElementById('nx').onclick=()=>go(i+1);
+let x0=null;const car=document.getElementById('car');car.addEventListener('touchstart',e=>x0=e.touches[0].clientX,{passive:true});car.addEventListener('touchend',e=>{if(x0==null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)go(i+(dx<0?1:-1));x0=null});
+go(0);
+</script></body></html>
